@@ -1,0 +1,11 @@
+Model Information:
+* title:	A alphabet lore
+* source:	https://sketchfab.com/3d-models/a-alphabet-lore-59b4a3cff3db4c1b819a8d60982a85fd
+* author:	HANDAR (https://sketchfab.com/ozukova06)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "A alphabet lore" (https://sketchfab.com/3d-models/a-alphabet-lore-59b4a3cff3db4c1b819a8d60982a85fd) by HANDAR (https://sketchfab.com/ozukova06) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

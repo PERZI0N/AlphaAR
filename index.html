@@ -1,201 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AR.js 3D Models</title>
-    <style>
-      body {
-        margin: 0;
-        height: 100vh; /* Set body height to 100% of the viewport height */
-        overflow: hidden; /* Optional: Hide vertical scrollbar */
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AR.js 3D Models</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      /* Set body height to 100% of the viewport height */
+      overflow: hidden;
+      /* Optional: Hide vertical scrollbar */
+    }
+
+    /* Optional: Set a-scene to 100% of the viewport height */
+    a-scene {
+      height: 100%;
+    }
+
+    /* Optional: Set the button container to a fixed position */
+    .button-container {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+    }
+  </style>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.0.8/aframe/build/aframe-ar.js"></script>
+</head>
+
+<body>
+  <a-scene embedded arjs>
+
+
+    <!-- Marker for Model 1 -->
+    <a-marker preset="custom" type="pattern" url="patterns/pattern-a.patt">
+      <a-entity id="a" gltf-model="url(a/a.gltf)" scale="5 5 5" position="0 3 0" rotation="0 0 0"></a-entity>
+    </a-marker>
+
+    <!-- Marker for Model 2 -->
+    <a-marker preset="custom" type="pattern" url="patterns/pattern-b.patt">
+      <a-entity id="b" gltf-model="url(b/b.gltf)" scale="3 3 3" position="0 0 0" rotation="0 0 0"></a-entity>
+    </a-marker>
+
+    <!-- Marker for Model 3 -->
+    <a-marker preset="custom" type="pattern" url="patterns/pattern-c.patt">
+      <a-entity id="c" gltf-model="url(c/c.gltf)" scale="2 2 2" position="0 0 0" rotation="0 0 0"></a-entity>
+    </a-marker>
+
+    <!-- Marker for Model 4 -->
+    <a-marker preset="custom" type="pattern" url="patterns/pattern-d.patt">
+      <a-entity id="d" gltf-model="url(d/d.gltf)" scale="2 2 2" position="0 0 0" rotation="0 0 0"></a-entity>
+    </a-marker>
+
+    <a-camera-static></a-camera-static>
+
+    <!-- Buttons -->
+    <div style="position: absolute; top: 10px; left: 10px; z-index: 1000;">
+      <button onclick="handleButtonClick('flipLeft', 'a')">Flip Left</button>
+      <button onclick="handleButtonClick('flipRight', 'a')">Flip Right</button>
+      <button onclick="handleButtonClick('playAudio', 'a')">Play Audio</button>
+    </div>
+  </a-scene>
+
+  <script>
+    // Audio data object
+    const audioData = {
+      "a": "a for apple",
+      "b": "b for ball",
+      "c": "c for cat",
+      "d": "d for dog"
+    };
+
+    // Function to flip the model to its mirror image on the left side
+  function flipLeft(id) {
+    const model = document.getElementById(id);
+    if (model) {
+      model.object3D.rotation.y += THREE.Math.degToRad(180); // Rotate by 130 degrees around the Y-axis
+    }
+  }
+
+  // Function to flip the model back to its original position
+  function flipRight(id) {
+    const model = document.getElementById(id);
+    if (model) {
+      model.object3D.rotation.y -= THREE.Math.degToRad(180); // Rotate by -130 degrees around the Y-axis
+    }
+  }
+
+    // Function to play audio based on the pattern file name
+    function playAudio(id) {
+      const audioText = audioData[id]; // Get the text associated with the model ID
+      if (audioText) {
+        speakText(audioText); // Call the speakText function with the audio text
       }
+    }
 
-      /* Optional: Set a-scene to 100% of the viewport height */
-      a-scene {
-        height: 100%;
-      }
+    // Function to speak given text
+    function speakText(text) {
+      const synth = window.speechSynthesis;
+      const utterance = new SpeechSynthesisUtterance(text);
+      synth.speak(utterance);
+    }
 
-      /* Optional: Set the button container to a fixed position */
-      .button-container {
-        position: fixed;
-        top: 10px;
-        left: 10px;
-      }
-    </style>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.0.8/aframe/build/aframe-ar.js"></script>
-  </head>
-
-  <body>
-    <a-scene embedded arjs>
-      
-
-      <!-- Marker for Model 1 -->
-      <a-marker preset="custom" type="pattern" url="patterns/pattern-a.patt">
-        <a-entity
-          id="a"
-          gltf-model="url(a/a.gltf)"
-          scale="2 2 2"
-          position= "0 0 0"
-          rotation="0 0 0"
-        ></a-entity>
-      </a-marker>
-
-      <!-- Marker for Model 2 -->
-      <a-marker preset="custom" type="pattern" url="patterns/pattern-b.patt">
-        <a-entity
-          id="b"
-          gltf-model="url(b/b.gltf)"
-          scale="3 3 3"
-          position= "0 0 0"
-          rotation="0 0 0"
-        ></a-entity>
-      </a-marker>
-
-      <!-- Marker for Model 3 -->
-      <a-marker preset="custom" type="pattern" url="patterns/pattern-c.patt">
-        <a-entity
-          id="c"
-          gltf-model="url(c/c.gltf)"
-          scale="2 2 2"
-          position= "0 0 0"
-          rotation="0 0 0"
-        ></a-entity>
-      </a-marker>
-
-      <!-- Marker for Model 4 -->
-      <a-marker preset="custom" type="pattern" url="patterns/pattern-d.patt">
-        <a-entity
-          id="d"
-          gltf-model="url(d/d.gltf)"
-          scale="2 2 2"
-          position= "0 0 0"
-          rotation="0 0 0"
-        ></a-entity>
-      </a-marker>
-
-      <a-camera-static></a-camera-static>
-
-      <!-- Buttons -->
-      <div style="position: absolute; top: 10px; left: 10px; z-index: 1000;">
-        <button onclick="handleButtonClick('flipLeft', 'a')">Flip Left</button>
-        <button onclick="handleButtonClick('flipRight', 'a')">Flip Right</button>
-        <button onclick="handleButtonClick('playAudio', 'a')">Play Audio</button>
-      </div>
-    </a-scene>
-
-    <script>
-      // Audio data object
-      const audioData = {
-        "a": "a for apple",
-        "b": "b for ball",
-        "c": "c for cat",
-        "d": "d for dog"
-      };
-    
-      // Function to flip the model to its mirror image on the left side
-      function flipModel(id) {
-        const model = document.getElementById(id);
-        if (model) {
-          const currentRotation = model.getAttribute("rotation");
-          // Rotate by 180 degrees in the x-axis
-          model.setAttribute(
-            "rotation",
-            `${Number(currentRotation.x) + 180} ${currentRotation.y} ${currentRotation.z}`
-          );
+    // Function to handle button clicks based on the current model ID
+    function handleButtonClick(action) {
+      const currentModelID = getCurrentModelID(); // Get the current model ID
+      if (currentModelID) {
+        if (action === "flipLeft") {
+          flipLeft(currentModelID);
+        } else if (action === "flipRight") {
+          flipRight(currentModelID);
+        } else if (action === "playAudio") {
+          playAudio(currentModelID);
         }
       }
-    
-      // Function to flip the model back to its original position
-      function flipModelBack(id) {
-        const model = document.getElementById(id);
-        if (model) {
-          const currentRotation = model.getAttribute("rotation");
-          // Rotate back by 180 degrees in the x-axis
-          model.setAttribute(
-            "rotation",
-            `${Number(currentRotation.x) - 180} ${currentRotation.y} ${currentRotation.z}`
-          );
-        }
-      }
-    
-      // Function to play audio based on the pattern file name
-      function playAudio(id) {
-        const audioText = audioData[id]; // Get the text associated with the model ID
-        if (audioText) {
-          speakText(audioText); // Call the speakText function with the audio text
-        }
-      }
-    
-      // Function to speak given text
-      function speakText(text) {
-        const synth = window.speechSynthesis;
-        const utterance = new SpeechSynthesisUtterance(text);
-        synth.speak(utterance);
-      }
-    
-      // Function to handle button clicks based on the current model ID
-      function handleButtonClick(action) {
-        const currentModelID = getCurrentModelID(); // Get the current model ID
-        if (currentModelID) {
-          if (action === "flipLeft") {
-            flipModel(currentModelID);
-          } else if (action === "flipRight") {
-            flipModelBack(currentModelID);
-          } else if (action === "playAudio") {
-            playAudio(currentModelID);
-          }
-        }
-      }
-    
-      // Function to get the current model ID displayed on a marker
-      function getCurrentModelID() {
-        // Logic to detect the currently displayed model based on markers
-        // This will depend on the AR.js events or marker detection functions
-        // Example: using AR.js events like 'markerFound' or 'markerLost'
-        // Update the currentModelID variable when a marker is found
-        // You'll need to implement this part using AR.js event handling
-        // Here, I'll use a sample implementation to demonstrate the concept
-        // Replace this with actual AR.js marker detection logic
-    
-        const markerA = document.querySelector('a-marker[type="pattern"][url="patterns/pattern-a.patt"]');
-        const markerB = document.querySelector('a-marker[type="pattern"][url="patterns/pattern-b.patt"]');
-        const markerC = document.querySelector('a-marker[type="pattern"][url="patterns/pattern-c.patt"]');
-        const markerD = document.querySelector('a-marker[type="pattern"][url="patterns/pattern-d.patt"]');
-    
-        if (markerA && markerA.object3D.visible) {
-          return "a";
-        } else if (markerB && markerB.object3D.visible) {
-          return "b";
-        } else if (markerC && markerC.object3D.visible) {
-          return "c";
-        } else if (markerD && markerD.object3D.visible) {
-          return "d";
-        }
-    
-        return null; // If no marker is found or visible
-      }
-    
-      // Function to listen for marker events (replace this with actual AR.js event handling)
-      function listenForMarkerEvents() {
-        // Example: listen for markerFound event
-        const markerA = document.querySelector('a-marker[type="pattern"][url="patterns/pattern-a.patt"]');
-        if (markerA) {
-          markerA.addEventListener("markerFound", function () {
-            const currentModelID = getCurrentModelID();
-            console.log(`Model ${currentModelID} is displayed on Pattern A marker.`);
-          });
-        }
-    
-        // Similar handling for other markers
-        // Add event listeners for other markers (B, C, D) as needed
-      }
-    
-      // Listen for marker events when the scene is loaded
-      window.addEventListener("load", listenForMarkerEvents);
-    
-    </script>
+    }
 
-  </body>
+    // Function to get the current model ID displayed on a marker
+    function getCurrentModelID() {
+      // Logic to detect the currently displayed model based on markers
+      // This will depend on the AR.js events or marker detection functions
+      // Example: using AR.js events like 'markerFound' or 'markerLost'
+      // Update the currentModelID variable when a marker is found
+      // You'll need to implement this part using AR.js event handling
+      // Here, I'll use a sample implementation to demonstrate the concept
+      // Replace this with actual AR.js marker detection logic
+
+      const markerA = document.querySelector('a-marker[type="pattern"][url="patterns/pattern-a.patt"]');
+      const markerB = document.querySelector('a-marker[type="pattern"][url="patterns/pattern-b.patt"]');
+      const markerC = document.querySelector('a-marker[type="pattern"][url="patterns/pattern-c.patt"]');
+      const markerD = document.querySelector('a-marker[type="pattern"][url="patterns/pattern-d.patt"]');
+
+      if (markerA && markerA.object3D.visible) {
+        return "a";
+      } else if (markerB && markerB.object3D.visible) {
+        return "b";
+      } else if (markerC && markerC.object3D.visible) {
+        return "c";
+      } else if (markerD && markerD.object3D.visible) {
+        return "d";
+      }
+
+      return null; // If no marker is found or visible
+    }
+
+    // Function to listen for marker events (replace this with actual AR.js event handling)
+    function listenForMarkerEvents() {
+      // Example: listen for markerFound event
+      const markerA = document.querySelector('a-marker[type="pattern"][url="patterns/pattern-a.patt"]');
+      if (markerA) {
+        markerA.addEventListener("markerFound", function () {
+          const currentModelID = getCurrentModelID();
+          console.log(`Model ${currentModelID} is displayed on Pattern A marker.`);
+        });
+      }
+
+      // Similar handling for other markers
+      // Add event listeners for other markers (B, C, D) as needed
+    }
+
+    // Listen for marker events when the scene is loaded
+    window.addEventListener("load", listenForMarkerEvents);
+
+  </script>
+
+</body>
+
 </html>
