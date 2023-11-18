@@ -1,0 +1,183 @@
+{
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 928,
+      "type": "VEC3",
+      "max": [
+        0.0,
+        1.4901161193847656E-08,
+        4.76837158203125E-07
+      ],
+      "min": [
+        -0.86834031343460083,
+        -0.20148897171020508,
+        -1.6634297370910645
+      ]
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 928,
+      "type": "VEC3",
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ]
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 928,
+      "type": "VEC4",
+      "max": [
+        1.0,
+        0.75973975658416748,
+        1.0,
+        -1.0
+      ],
+      "min": [
+        -1.0,
+        -0.709477961063385,
+        -1.0,
+        -1.0
+      ]
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 928,
+      "type": "VEC2",
+      "max": [
+        1.1701347827911377,
+        0.802425742149353
+      ],
+      "min": [
+        -0.69856536388397217,
+        -0.802425742149353
+      ]
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5125,
+      "count": 1908,
+      "type": "SCALAR",
+      "max": [
+        927.0
+      ],
+      "min": [
+        0.0
+      ]
+    }
+  ],
+  "asset": {
+    "generator": "UnityGLTF (2022.3.11f1)",
+    "version": "2.0"
+  },
+  "buffers": [
+    {
+      "uri": "c.bin",
+      "byteLength": 52176
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 11136
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 11136,
+      "byteLength": 11136
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 22272,
+      "byteLength": 14848
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 37120,
+      "byteLength": 7424
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 44544,
+      "byteLength": 7632
+    }
+  ],
+  "materials": [
+    {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.7921569,
+          0.258823544,
+          0.280837923,
+          1.0
+        ],
+        "metallicFactor": 0.0
+      },
+      "emissiveFactor": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "name": "material_a"
+    }
+  ],
+  "meshes": [
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0
+        }
+      ],
+      "name": "c"
+    }
+  ],
+  "nodes": [
+    {
+      "mesh": 0,
+      "rotation": [
+        0.7262167,
+        0.002510103,
+        -0.00222426443,
+        -0.6874578
+      ],
+      "scale": [
+        0.79524,
+        1.00000024,
+        0.3750601
+      ],
+      "translation": [
+        -1.407,
+        -0.365,
+        12.484
+      ],
+      "name": "c"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "nodes": [
+        0
+      ],
+      "name": "c"
+    }
+  ]
+}
