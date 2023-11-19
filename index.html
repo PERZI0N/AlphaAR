@@ -23,7 +23,8 @@
     .button-container {
       text-align: center;
       position: absolute;
-      top: 10px; /* Adjust this value to fit below the header */
+      top: 10px;
+      /* Adjust this value to fit below the header */
       width: 100%;
       z-index: 1000;
     }
@@ -32,19 +33,23 @@
     .button-container button {
       padding: 10px 20px;
       margin: 5px;
-      background-color: #333; /* Button background color */
+      background-color: #333;
+      /* Button background color */
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
       font-size: 16px;
-      transition: all 0.3s ease; /* Smooth transition for button effects */
+      transition: all 0.3s ease;
+      /* Smooth transition for button effects */
     }
 
     /* Button hover effect */
     .button-container button:hover {
-      background-color: #0056b3; /* Darker color on hover */
-      transform: scale(1.1); /* Scale the button slightly on hover */
+      background-color: #0056b3;
+      /* Darker color on hover */
+      transform: scale(1.1);
+      /* Scale the button slightly on hover */
     }
 
     /* Optional: Add a subtle shadow effect to the buttons */
@@ -70,60 +75,115 @@
 
     <!-- Marker for Model 2 -->
     <a-marker preset="custom" type="pattern" url="patterns/pattern-b.patt">
-      <a-entity id="b" gltf-model="url(b/b.gltf)" scale="3 3 3" position="0 0 0" rotation="0 0 0"></a-entity>
+      <a-entity id="b" gltf-model="url(b/scene.gltf)" scale="5 5 5" position="0 3 0" rotation="0 0 0"></a-entity>
     </a-marker>
 
     <!-- Marker for Model 3 -->
     <a-marker preset="custom" type="pattern" url="patterns/pattern-c.patt">
-      <a-entity id="c" gltf-model="url(c/c.gltf)" scale="2 2 2" position="0 0 0" rotation="0 0 0"></a-entity>
+      <a-entity id="c" gltf-model="url(c/scene.gltf)" scale="5 5 5" position="0 3 0" rotation="0 0 0"></a-entity>
     </a-marker>
 
     <!-- Marker for Model 4 -->
     <a-marker preset="custom" type="pattern" url="patterns/pattern-d.patt">
-      <a-entity id="d" gltf-model="url(d/d.gltf)" scale="2 2 2" position="0 0 0" rotation="0 0 0"></a-entity>
+      <a-entity id="d" gltf-model="url(d/scene.gltf)" scale="5 5 5" position="0 3 0" rotation="0 0 0"></a-entity>
     </a-marker>
 
     <a-camera-static></a-camera-static>
 
     <!-- Buttons -->
-    <div class="button-container" >
+    <div class="button-container">
       <button onclick="handleButtonClick('flipLeft', 'a')">Flip Left</button>
-      <button onclick="handleButtonClick('flipRight', 'a')">Flip Right</button>
+      <button onclick="handleButtonClick('flipDown', 'a')">Flip Down</button>
       <button onclick="handleButtonClick('playAudio', 'a')">Play Audio</button>
+
     </div>
   </a-scene>
 
-  <footer style="background-color: #333; color: white; padding: 8px; text-align: center; position: fixed; bottom: 0; width: 100%; z-index: 1000;">
+  <footer
+    style="background-color: #333; color: white; padding: 8px; text-align: center; position: fixed; bottom: 0; width: 100%; z-index: 1000;">
     <p style="font-size: 1.25rem;">&copy; Created by Susan and Vaidik</p>
   </footer>
 
   <script>
     // Audio data object
     const audioData = {
-      "a": "a for apple",
+      "a": "A for apple",
       "b": "b for ball",
       "c": "c for cat",
-      "d": "d for dog"
+      "d": "d for dog",
+      // "correct" : "correct",
+      // "wrong" : "wrong"
     };
 
-    // Function to flip the model to its mirror image on the left side
-  function flipLeft(id) {
-    const model = document.getElementById(id);
-    if (model) {
-      model.object3D.rotation.y += THREE.Math.degToRad(180); // Rotate by 130 degrees around the Y-axis
-    }
+    function createRedCross() {
+    const cross = document.createElement('div');
+    cross.innerHTML = '&#10060;'; // Unicode for cross symbol
+    cross.style.color = 'red';
+    cross.style.position = 'absolute';
+    cross.style.top = '50%';
+    cross.style.left = '50%';
+    cross.style.transform = 'translate(-50%, -50%)';
+    cross.style.fontSize = '48px';
+    document.body.appendChild(cross);
+    setTimeout(() => {
+      cross.remove(); // Remove the cross element after a delay (2 seconds here)
+    }, 2000);
   }
 
-  // Function to flip the model back to its original position
-  function flipRight(id) {
-    const model = document.getElementById(id);
-    if (model) {
-      model.object3D.rotation.y -= THREE.Math.degToRad(180); // Rotate by -130 degrees around the Y-axis
+  function createGreenTick() {
+  const tick = document.createElement('div');
+  tick.innerHTML = '&#10004;'; // Unicode for checkmark symbol
+  tick.style.color = 'green';
+  tick.style.position = 'absolute';
+  tick.style.top = '50%';
+  tick.style.left = '50%';
+  tick.style.transform = 'translate(-50%, -50%)';
+  tick.style.fontSize = '48px';
+  document.body.appendChild(tick);
+  setTimeout(() => {
+    tick.remove(); // Remove the tick element after a delay (2 seconds here)
+  }, 2000);
+}
+
+    var c = 0;
+    var d = 0;
+
+    // Function to flip the model to its mirror image on the left side
+    function flipLeft(id) {
+      const model = document.getElementById(id);
+      if (model) {
+        model.object3D.rotation.y += THREE.Math.degToRad(180); // Rotate by 180 degrees around the Y-axis
+        c++;
+        if (c % 2 === 0 && d % 2 === 0) {
+          speakText("correct");
+          createGreenTick()
+        } else {
+          speakText("wrong");
+          createRedCross(); // Call function to create red cross
+        }
+      }
     }
-  }
+
+    // Function to flip the model back to its original position
+    function flipDown(id) {
+      const model = document.getElementById(id);
+      if (model) {
+        model.object3D.rotation.x -= THREE.Math.degToRad(180); // Rotate by -180 degrees around the Y-axis
+        d++;
+        console.log(d);
+        if (d % 2 === 0 && c % 2 === 0) {
+          speakText("correct");
+          createGreenTick()
+        } else {
+          speakText("wrong");
+          createRedCross(); // Call function to create red cross
+        }
+      }
+    }
 
     // Function to play audio based on the pattern file name
     function playAudio(id) {
+      console.log(id);
       const audioText = audioData[id]; // Get the text associated with the model ID
       if (audioText) {
         speakText(audioText); // Call the speakText function with the audio text
@@ -139,15 +199,15 @@
 
     // Function to handle button clicks based on the current model ID
     function handleButtonClick(action) {
-      const currentModelID = getCurrentModelID(); // Get the current model ID
+      const currentModelID = getCurrentModelID();
       if (currentModelID) {
         if (action === "flipLeft") {
           flipLeft(currentModelID);
-        } else if (action === "flipRight") {
-          flipRight(currentModelID);
+        } else if (action === "flipDown") {
+          flipDown(currentModelID);
         } else if (action === "playAudio") {
           playAudio(currentModelID);
-        }
+        } // Call function to compare rotation
       }
     }
 
@@ -193,9 +253,6 @@
       // Similar handling for other markers
       // Add event listeners for other markers (B, C, D) as needed
     }
-
-    // Listen for marker events when the scene is loaded
-    window.addEventListener("load", listenForMarkerEvents);
 
   </script>
 
