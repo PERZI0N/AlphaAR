@@ -1,11 +1,11 @@
 Model Information:
-* title:	C From Alphabet Lore
-* source:	https://sketchfab.com/3d-models/c-from-alphabet-lore-0fa3b1d6165042d49329890351e94a71
-* author:	Priya Mangal The Object Thingy (https://sketchfab.com/kmorganc1)
+* title:	Harrymations C (Russian Alphabet Lore)
+* source:	https://sketchfab.com/3d-models/harrymations-c-russian-alphabet-lore-42526737df224a3fb8c40e8965486b19
+* author:	aniandronic (https://sketchfab.com/aniandronic)
 
 Model License:
 * license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 * requirements:	Author must be credited. Commercial use is allowed.
 
 If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
-This work is based on "C From Alphabet Lore" (https://sketchfab.com/3d-models/c-from-alphabet-lore-0fa3b1d6165042d49329890351e94a71) by Priya Mangal The Object Thingy (https://sketchfab.com/kmorganc1) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+This work is based on "Harrymations C (Russian Alphabet Lore)" (https://sketchfab.com/3d-models/harrymations-c-russian-alphabet-lore-42526737df224a3fb8c40e8965486b19) by aniandronic (https://sketchfab.com/aniandronic) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

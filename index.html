@@ -9,50 +9,38 @@
     body {
       margin: 0;
       height: 100vh;
-      /* Set body height to 100% of the viewport height */
       overflow: hidden;
-      /* Optional: Hide vertical scrollbar */
     }
 
-    /* Optional: Set a-scene to 100% of the viewport height */
     a-scene {
       height: 100%;
     }
 
-    /* Optional: Set the button container to a fixed position */
     .button-container {
       text-align: center;
       position: absolute;
       top: 10px;
-      /* Adjust this value to fit below the header */
       width: 100%;
       z-index: 1000;
     }
 
-    /* Styling for the buttons */
     .button-container button {
       padding: 10px 20px;
       margin: 5px;
       background-color: #333;
-      /* Button background color */
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
       font-size: 16px;
       transition: all 0.3s ease;
-      /* Smooth transition for button effects */
     }
 
-    /* Button hover effect */
     .button-container button:hover {
       background-color: #0056b3;
-      /* Darker color on hover */
       transform: scale(1.1);
-      /* Scale the button slightly on hover */
     }
 
-    /* Optional: Add a subtle shadow effect to the buttons */
     .button-container button:focus {
       box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.5);
     }
@@ -68,29 +56,24 @@
   <a-scene embedded arjs>
 
 
-    <!-- Marker for Model 1 -->
     <a-marker preset="custom" type="pattern" url="patterns/pattern-a.patt">
-      <a-entity id="a" gltf-model="url(a/a.gltf)" scale="5 5 5" position="0 3 0" rotation="0 0 0"></a-entity>
+      <a-entity id="a" gltf-model="url(a/a.gltf)" scale="4 4 4" position="0 3 0" rotation="0 0 0"></a-entity>
     </a-marker>
 
-    <!-- Marker for Model 2 -->
     <a-marker preset="custom" type="pattern" url="patterns/pattern-b.patt">
-      <a-entity id="b" gltf-model="url(b/scene.gltf)" scale="5 5 5" position="0 3 0" rotation="0 0 0"></a-entity>
+      <a-entity id="b" gltf-model="url(b/scene.gltf)" scale="250 250 250" position="0 3 0" rotation="0 0 0"></a-entity>
     </a-marker>
 
-    <!-- Marker for Model 3 -->
     <a-marker preset="custom" type="pattern" url="patterns/pattern-c.patt">
       <a-entity id="c" gltf-model="url(c/scene.gltf)" scale="5 5 5" position="0 3 0" rotation="0 0 0"></a-entity>
     </a-marker>
 
-    <!-- Marker for Model 4 -->
     <a-marker preset="custom" type="pattern" url="patterns/pattern-d.patt">
-      <a-entity id="d" gltf-model="url(d/scene.gltf)" scale="5 5 5" position="0 3 0" rotation="0 0 0"></a-entity>
+      <a-entity id="d" gltf-model="url(d/scene.gltf)" scale="200 200 200" position="0 3 0" rotation="0 0 0"></a-entity>
     </a-marker>
 
     <a-camera-static></a-camera-static>
 
-    <!-- Buttons -->
     <div class="button-container">
       <button onclick="handleButtonClick('flipLeft', 'a')">Flip Left</button>
       <button onclick="handleButtonClick('flipDown', 'a')">Flip Down</button>
@@ -105,88 +88,18 @@
   </footer>
 
   <script>
-    // Audio data object
     const audioData = {
       "a": "A for apple",
       "b": "b for ball",
       "c": "c for cat",
       "d": "d for dog",
-      // "correct" : "correct",
-      // "wrong" : "wrong"
     };
 
-    function createRedCross() {
-    const cross = document.createElement('div');
-    cross.innerHTML = '&#10060;'; // Unicode for cross symbol
-    cross.style.color = 'red';
-    cross.style.position = 'absolute';
-    cross.style.top = '50%';
-    cross.style.left = '50%';
-    cross.style.transform = 'translate(-50%, -50%)';
-    cross.style.fontSize = '48px';
-    document.body.appendChild(cross);
-    setTimeout(() => {
-      cross.remove(); // Remove the cross element after a delay (2 seconds here)
-    }, 2000);
-  }
-
-  function createGreenTick() {
-  const tick = document.createElement('div');
-  tick.innerHTML = '&#10004;'; // Unicode for checkmark symbol
-  tick.style.color = 'green';
-  tick.style.position = 'absolute';
-  tick.style.top = '50%';
-  tick.style.left = '50%';
-  tick.style.transform = 'translate(-50%, -50%)';
-  tick.style.fontSize = '48px';
-  document.body.appendChild(tick);
-  setTimeout(() => {
-    tick.remove(); // Remove the tick element after a delay (2 seconds here)
-  }, 2000);
-}
-
-    var c = 0;
-    var d = 0;
-
-    // Function to flip the model to its mirror image on the left side
-    function flipLeft(id) {
-      const model = document.getElementById(id);
-      if (model) {
-        model.object3D.rotation.y += THREE.Math.degToRad(180); // Rotate by 180 degrees around the Y-axis
-        c++;
-        if (c % 2 === 0 && d % 2 === 0) {
-          speakText("correct");
-          createGreenTick()
-        } else {
-          speakText("wrong");
-          createRedCross(); // Call function to create red cross
-        }
-      }
-    }
-
-    // Function to flip the model back to its original position
-    function flipDown(id) {
-      const model = document.getElementById(id);
-      if (model) {
-        model.object3D.rotation.x -= THREE.Math.degToRad(180); // Rotate by -180 degrees around the Y-axis
-        d++;
-        console.log(d);
-        if (d % 2 === 0 && c % 2 === 0) {
-          speakText("correct");
-          createGreenTick()
-        } else {
-          speakText("wrong");
-          createRedCross(); // Call function to create red cross
-        }
-      }
-    }
-
-    // Function to play audio based on the pattern file name
     function playAudio(id) {
       console.log(id);
-      const audioText = audioData[id]; // Get the text associated with the model ID
+      const audioText = audioData[id];
       if (audioText) {
-        speakText(audioText); // Call the speakText function with the audio text
+        speakText(audioText);
       }
     }
 
@@ -197,7 +110,70 @@
       synth.speak(utterance);
     }
 
-    // Function to handle button clicks based on the current model ID
+    function createRedCross() {
+      const cross = document.createElement('div');
+      cross.innerHTML = '&#10060;';
+      cross.style.color = 'red';
+      cross.style.position = 'absolute';
+      cross.style.top = '50%';
+      cross.style.left = '50%';
+      cross.style.transform = 'translate(-50%, -50%)';
+      cross.style.fontSize = '48px';
+      document.body.appendChild(cross);
+      setTimeout(() => {
+        cross.remove();
+      }, 2000);
+    }
+
+    function createGreenTick() {
+      const tick = document.createElement('div');
+      tick.innerHTML = '&#10004;';
+      tick.style.color = 'green';
+      tick.style.position = 'absolute';
+      tick.style.top = '50%';
+      tick.style.left = '50%';
+      tick.style.transform = 'translate(-50%, -50%)';
+      tick.style.fontSize = '48px';
+      document.body.appendChild(tick);
+      setTimeout(() => {
+        tick.remove();
+      }, 2000);
+    }
+
+    var c = 0;
+    var d = 0;
+    function flipLeft(id) {
+      const model = document.getElementById(id);
+      if (model) {
+        model.object3D.rotation.y += THREE.Math.degToRad(180);
+        c++;
+        if (c % 2 === 0 && d % 2 === 0) {
+          speakText("correct");
+          createGreenTick()
+        } else {
+          speakText("wrong");
+          createRedCross();
+        }
+      }
+    }
+
+    function flipDown(id) {
+      const model = document.getElementById(id);
+      if (model) {
+        model.object3D.rotation.x -= THREE.Math.degToRad(180);
+        d++;
+        console.log(d);
+        if (d % 2 === 0 && c % 2 === 0) {
+          speakText("correct");
+          createGreenTick()
+        } else {
+          speakText("wrong");
+          createRedCross();
+        }
+      }
+    }
+
+
     function handleButtonClick(action) {
       const currentModelID = getCurrentModelID();
       if (currentModelID) {
@@ -207,19 +183,11 @@
           flipDown(currentModelID);
         } else if (action === "playAudio") {
           playAudio(currentModelID);
-        } // Call function to compare rotation
+        }
       }
     }
 
-    // Function to get the current model ID displayed on a marker
     function getCurrentModelID() {
-      // Logic to detect the currently displayed model based on markers
-      // This will depend on the AR.js events or marker detection functions
-      // Example: using AR.js events like 'markerFound' or 'markerLost'
-      // Update the currentModelID variable when a marker is found
-      // You'll need to implement this part using AR.js event handling
-      // Here, I'll use a sample implementation to demonstrate the concept
-      // Replace this with actual AR.js marker detection logic
 
       const markerA = document.querySelector('a-marker[type="pattern"][url="patterns/pattern-a.patt"]');
       const markerB = document.querySelector('a-marker[type="pattern"][url="patterns/pattern-b.patt"]');
@@ -236,12 +204,9 @@
         return "d";
       }
 
-      return null; // If no marker is found or visible
+      return null;
     }
-
-    // Function to listen for marker events (replace this with actual AR.js event handling)
     function listenForMarkerEvents() {
-      // Example: listen for markerFound event
       const markerA = document.querySelector('a-marker[type="pattern"][url="patterns/pattern-a.patt"]');
       if (markerA) {
         markerA.addEventListener("markerFound", function () {
@@ -249,9 +214,6 @@
           console.log(`Model ${currentModelID} is displayed on Pattern A marker.`);
         });
       }
-
-      // Similar handling for other markers
-      // Add event listeners for other markers (B, C, D) as needed
     }
 
   </script>
